@@ -26,13 +26,23 @@ class LoginView extends GetView<LoginController> {
               ),
             ),
             SizedBox(height: 20.0),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
+            Obx(() => TextFormField(
+                  obscureText: controller.passwordVisible.value,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.passwordVisible.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        controller.togglePasswordVisibility();
+                      },
+                    ),
+                  ),
+                )),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
@@ -43,7 +53,7 @@ class LoginView extends GetView<LoginController> {
             SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
-                Get.off(() => SignupView());
+                Get.to(() => SignupView());
               },
               child: Text('Sign Up'),
             ),

@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  var passwordVisible = false.obs;
 
-  final count = 0.obs;
+  void togglePasswordVisibility() {
+    passwordVisible.toggle();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +21,4 @@ class LoginController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

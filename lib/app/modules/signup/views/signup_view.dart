@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:invoice/app/modules/login/controllers/login_controller.dart';
 import 'package:invoice/app/modules/login/views/login_view.dart';
 
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
-  const SignupView({Key? key}) : super(key: key);
+  LoginController logincontroller = Get.put(LoginController());
+  SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +28,23 @@ class SignupView extends GetView<SignupController> {
               ),
             ),
             SizedBox(height: 20.0),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
+            Obx(() => TextFormField(
+                  obscureText: logincontroller.passwordVisible.value,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        logincontroller.passwordVisible.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        logincontroller.togglePasswordVisibility();
+                      },
+                    ),
+                  ),
+                )),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
@@ -43,7 +55,7 @@ class SignupView extends GetView<SignupController> {
             SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
-                Get.off(() => LoginView());
+                Get.to(() => LoginView());
               },
               child: Text('Back to Login'),
             ),

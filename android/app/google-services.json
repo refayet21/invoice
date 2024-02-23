@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "741254538409",
+    "project_id": "invoicemaker-a38a2",
+    "storage_bucket": "invoicemaker-a38a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741254538409:android:520e07514ea9d83b8cf5b8",
+        "android_client_info": {
+          "package_name": "com.example.invoice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlEHbTQ5m3dbstxhUjsWJZWabZ_l7aLhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741254538409:android:5cae1bdf2663e1938cf5b8",
+        "android_client_info": {
+          "package_name": "com.example.invoice_maker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlEHbTQ5m3dbstxhUjsWJZWabZ_l7aLhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

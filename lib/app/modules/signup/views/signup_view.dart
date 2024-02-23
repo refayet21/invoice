@@ -76,7 +76,7 @@ class SignupView extends GetView<SignupController> {
                       // await SignupController.addUser(UserModel(
                       //     userId: controller.authUser!.uid,
                       //     email: _emailController.text));
-                      Get.offAll(LoginView());
+                      Get.to(LoginView());
                     } catch (e) {
                       // Handle signup errors
                       print('Signup Error: $e');
@@ -88,7 +88,7 @@ class SignupView extends GetView<SignupController> {
               SizedBox(height: 10.0),
               TextButton(
                 onPressed: () {
-                  Get.offAll(LoginView());
+                  Get.to(LoginView());
                 },
                 child: Text('Back to Login'),
               ),

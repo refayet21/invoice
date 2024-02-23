@@ -169,7 +169,7 @@ class LoginView extends GetView<LoginController> {
                           await controller.checkUserExists(email);
                       if (userExists) {
                         await controller.login(email, password);
-                        Get.offAll(HomeView());
+                        Get.to(HomeView());
                       } else {
                         Get.snackbar(
                           'Error',

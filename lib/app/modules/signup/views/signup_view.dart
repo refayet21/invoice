@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:invoice/app/modules/signup/views/signup_view.dart';
+import 'package:invoice/app/modules/login/views/login_view.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/signup_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text('Sign Up Page'),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -36,16 +36,16 @@ class LoginView extends GetView<LoginController> {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // Implement login functionality here
+                // Implement sign up functionality here
               },
-              child: Text('Login'),
+              child: Text('Sign Up'),
             ),
             SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
-                Get.off(() => SignupView());
+                Get.off(() => LoginView());
               },
-              child: Text('Sign Up'),
+              child: Text('Back to Login'),
             ),
           ],
         ),

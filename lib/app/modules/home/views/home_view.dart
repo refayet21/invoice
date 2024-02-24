@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:invoice/app/modules/login/views/login_view.dart';
+import 'package:invoice/app/modules/preview/views/preview_view.dart';
 import 'package:invoice/app/modules/vendor/views/vendor_view.dart';
 import 'package:invoice/model/vendor_model.dart';
 
@@ -204,24 +207,26 @@ class HomeView extends GetView<HomeController> {
               //       .toList(),
               // ),
 
-              DropdownButtonFormField<VendorModel>(
-                onChanged: (value) {
-                  selectedVendor = value;
-                },
-                decoration: InputDecoration(
-                  labelText: 'Select Vendor',
-                  border: OutlineInputBorder(),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              Obx(
+                () => DropdownButtonFormField<VendorModel>(
+                  onChanged: (value) {
+                    selectedVendor = value;
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Select Vendor',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  ),
+                  isExpanded: true,
+                  value: selectedVendor,
+                  items: homeController.vendors
+                      .map((vendor) => DropdownMenuItem<VendorModel>(
+                            value: vendor,
+                            child: Text(vendor.name ?? 'N/A'),
+                          ))
+                      .toList(),
                 ),
-                isExpanded: true,
-                value: selectedVendor,
-                items: homeController.vendors
-                    .map((vendor) => DropdownMenuItem<VendorModel>(
-                          value: vendor,
-                          child: Text(vendor.name ?? 'N/A'),
-                        ))
-                    .toList(),
               ),
               SizedBox(height: 16),
               ElevatedButton.icon(
@@ -317,7 +322,7 @@ class HomeView extends GetView<HomeController> {
 
                 //   homeController.generateInvoicePDF(vendorInfo);
                 // },
-                onPressed: () {
+                onPressed: () async {
                   // Get the selected vendor, date, product details from the controllers
                   String vendorInfo =
                       'Vendor Name: ${selectedVendor?.name ?? "N/A"}';
@@ -329,7 +334,7 @@ class HomeView extends GetView<HomeController> {
                       int.parse(productQuantityController.text);
 
                   // Call the generateInvoicePDF method
-                  homeController.generateInvoicePDF(vendorInfo, date,
+                  homeController.generateInvoicePdf(vendorInfo, date,
                       productName, productPrice, productQuantity);
                 },
                 child: Text('Invoice'),

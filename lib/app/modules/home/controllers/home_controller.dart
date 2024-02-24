@@ -106,29 +106,8 @@ class HomeController extends GetxController {
 
   // Function to save PDF
   void savePDF(pw.Document pdf) {
-    // Save the PDF file to device
     final bytes = pdf.save();
-    // Replace with your own logic to save the PDF file
-    // For example, you can save it to local storage
   }
-
-  // // Helper function to calculate total price
-  // double _calculateTotalPrice(List<ProductModel> products) {
-  //   double totalPrice = 0.0;
-  //   for (var product in products) {
-  //     totalPrice += product.price * product.quantity;
-  //   }
-  //   return totalPrice;
-  // }
-
-  // // Helper function to calculate total quantity
-  // int _calculateTotalQuantity(List<ProductModel> products) {
-  //   int totalQuantity = 0;
-  //   for (var product in products) {
-  //     totalQuantity += product.quantity;
-  //   }
-  //   return totalQuantity;
-  // }
 
   @override
   void onInit() {

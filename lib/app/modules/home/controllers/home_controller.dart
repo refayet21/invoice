@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:invoice/app/modules/vendor/controllers/vendor_controller.dart';
 import 'package:invoice/model/productmodel.dart';
 import 'package:invoice/model/vendor_model.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class HomeController extends GetxController {
   RxList<VendorModel> vendors = RxList<VendorModel>([]);
@@ -17,6 +19,116 @@ class HomeController extends GetxController {
   Stream<List<VendorModel>> getAllVendors() =>
       collectionReference.snapshots().map((query) =>
           query.docs.map((item) => VendorModel.fromJson(item)).toList());
+
+  // Dropdown options
+  List<String> dropdownOptions = ['Product 1', 'Product 2', 'Product 3'];
+
+  // Getter method for dropdown options
+  List<String> getDropdownOptions() {
+    return dropdownOptions;
+  }
+
+  void generateInvoicePDF(String? vendor, String? date, String? productName,
+      double? productPrice, int? productQuantity) {
+    final pdf = pw.Document();
+
+    // Calculate total price
+    final totalPrice = productPrice! * productQuantity!;
+
+    // Add page to PDF
+    pdf.addPage(
+      pw.MultiPage(
+        header: (pw.Context context) {
+          return pw.Container(
+            alignment: pw.Alignment.center,
+            margin: pw.EdgeInsets.only(bottom: 20.0),
+            child: pw.Column(
+              children: [
+                pw.Text(
+                  'Invoice',
+                  style: pw.TextStyle(
+                      fontSize: 20.0, fontWeight: pw.FontWeight.bold),
+                ),
+                pw.SizedBox(height: 10.0),
+                pw.Text('Vendor: ${vendor}',
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                pw.Text('Date: $date',
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+          );
+        },
+        build: (pw.Context context) {
+          return <pw.Widget>[
+            // Invoice body
+            pw.Table.fromTextArray(
+              context: context,
+              cellAlignment: pw.Alignment.centerLeft,
+              headerAlignment: pw.Alignment.centerLeft,
+              headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              cellStyle: const pw.TextStyle(),
+              headerDecoration: pw.BoxDecoration(color: PdfColors.grey300),
+              headers: <String>['Product Name', 'Price', 'Quantity'],
+              data: <List<String>>[
+                [
+                  productName!,
+                  productPrice.toString(),
+                  productQuantity.toString()
+                ],
+              ],
+            ),
+            // Summary section
+            pw.Divider(),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: [
+                pw.Text('Total Price:',
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                pw.Text(totalPrice.toStringAsFixed(2)),
+              ],
+            ),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: [
+                pw.Text('Total Quantity:',
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                pw.Text(productQuantity.toString()),
+              ],
+            ),
+          ];
+        },
+      ),
+    );
+
+    // Save the PDF file
+    savePDF(pdf);
+  }
+
+  // Function to save PDF
+  void savePDF(pw.Document pdf) {
+    // Save the PDF file to device
+    final bytes = pdf.save();
+    // Replace with your own logic to save the PDF file
+    // For example, you can save it to local storage
+  }
+
+  // // Helper function to calculate total price
+  // double _calculateTotalPrice(List<ProductModel> products) {
+  //   double totalPrice = 0.0;
+  //   for (var product in products) {
+  //     totalPrice += product.price * product.quantity;
+  //   }
+  //   return totalPrice;
+  // }
+
+  // // Helper function to calculate total quantity
+  // int _calculateTotalQuantity(List<ProductModel> products) {
+  //   int totalQuantity = 0;
+  //   for (var product in products) {
+  //     totalQuantity += product.quantity;
+  //   }
+  //   return totalQuantity;
+  // }
 
   @override
   void onInit() {

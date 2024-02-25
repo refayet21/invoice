@@ -1,38 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:get/get.dart';
-
-// class LoginController extends GetxController {
-//   static final FirebaseAuth _auth = FirebaseAuth.instance;
-
-//   static User? get currentUser => _auth.currentUser;
-
-//   static Future<User> login(String email, String password) async {
-//     final credential = await _auth.signInWithEmailAndPassword(
-//         email: email, password: password);
-//     return credential.user!;
-//   }
-
-//   var passwordVisible = false.obs;
-
-//   void togglePasswordVisibility() {
-//     passwordVisible.toggle();
-//   }
-
-//   @override
-//   void onInit() {
-//     super.onInit();
-//   }
-
-//   @override
-//   void onReady() {
-//     super.onReady();
-//   }
-
-//   @override
-//   void onClose() {
-//     super.onClose();
-//   }
-// }
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

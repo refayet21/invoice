@@ -29,87 +29,6 @@ class HomeController extends GetxController {
     return dropdownOptions;
   }
 
-  // void generateInvoicePDF(String? vendor, String? date, String? productName,
-  //     double? productPrice, int? productQuantity) {
-  //   final pdf = pw.Document();
-
-  //   // Calculate total price
-  //   final totalPrice = productPrice! * productQuantity!;
-
-  //   // Add page to PDF
-  //   pdf.addPage(
-  //     pw.MultiPage(
-  //       header: (pw.Context context) {
-  //         return pw.Container(
-  //           alignment: pw.Alignment.center,
-  //           margin: pw.EdgeInsets.only(bottom: 20.0),
-  //           child: pw.Column(
-  //             children: [
-  //               pw.Text(
-  //                 'Invoice',
-  //                 style: pw.TextStyle(
-  //                     fontSize: 20.0, fontWeight: pw.FontWeight.bold),
-  //               ),
-  //               pw.SizedBox(height: 10.0),
-  //               pw.Text('Vendor: ${vendor}',
-  //                   style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-  //               pw.Text('Date: $date',
-  //                   style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-  //             ],
-  //           ),
-  //         );
-  //       },
-  //       build: (pw.Context context) {
-  //         return <pw.Widget>[
-  //           // Invoice body
-  //           pw.Table.fromTextArray(
-  //             context: context,
-  //             cellAlignment: pw.Alignment.centerLeft,
-  //             headerAlignment: pw.Alignment.centerLeft,
-  //             headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-  //             cellStyle: const pw.TextStyle(),
-  //             headerDecoration: pw.BoxDecoration(color: PdfColors.grey300),
-  //             headers: <String>['Product Name', 'Price', 'Quantity'],
-  //             data: <List<String>>[
-  //               [
-  //                 productName!,
-  //                 productPrice.toString(),
-  //                 productQuantity.toString()
-  //               ],
-  //             ],
-  //           ),
-  //           // Summary section
-  //           pw.Divider(),
-  //           pw.Row(
-  //             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               pw.Text('Total Price:',
-  //                   style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-  //               pw.Text(totalPrice.toStringAsFixed(2)),
-  //             ],
-  //           ),
-  //           pw.Row(
-  //             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               pw.Text('Total Quantity:',
-  //                   style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-  //               pw.Text(productQuantity.toString()),
-  //             ],
-  //           ),
-  //         ];
-  //       },
-  //     ),
-  //   );
-
-  //   // Save the PDF file
-  //   savePDF(pdf);
-  // }
-
-  // Function to save PDF
-  // void savePDF(pw.Document pdf) {
-  //   final bytes = pdf.save();
-  // }
-
   Future<void> generateInvoicePdf(String vendorName, String date,
       String productName, double productPrice, int productQuantity) async {
     final doc = pw.Document();
@@ -196,11 +115,7 @@ class HomeController extends GetxController {
             base: ttf,
           ),
           build: (pw.Context context) {
-            // return  [
-            //   header,
-            //   body,
-            //   footer,
-            // ];
+          
 
             return pw.Expanded(
               child: pw.Padding(

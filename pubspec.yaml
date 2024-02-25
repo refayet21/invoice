@@ -26,6 +26,8 @@ dependencies:
   path: ^1.8.3
   path_provider: ^2.0.13
   advance_pdf_viewer2: ^2.0.5+1
+  geolocator: ^11.0.0
+  location: ^5.0.3
 
 
 dev_dependencies: 
